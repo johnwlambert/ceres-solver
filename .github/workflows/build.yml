@@ -33,19 +33,3 @@ jobs:
         # cleanup for custom runner
         sudo chown -R $(whoami):$(whoami) .
 
-  mac-build:
-    name: macOS Build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-11, macos-10.15]
-        pyversion: ["python@3.8", "python@3.9"] # "python@3.7" not supported in Github Actions
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        submodules: recursive
-    - name: Build the library on macOS
-      run: |
-        ./package/build-macos.sh ${{ matrix.pyversion }}
-
